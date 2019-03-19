@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: tkinterhtml
+Version: 0.7
+Summary: Python wrapper for Tkhtml3 (http://tkhtml.tcl.tk/)
+Home-page: https://bitbucket.org/aivarannamaa/tkinterhtml
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: MIT
+Description: See https://bitbucket.org/aivarannamaa/tkinterhtml for more info
+Keywords: tkinter Tkinter tkhtml Tkhtml Tk
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: Freeware
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development

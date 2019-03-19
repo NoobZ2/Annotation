@@ -1,0 +1,8 @@
+contains	12	19	解剖部位
+IP	症状描述
+addresses	独立症状
+addresses	40	48	解剖部位
+ddres	53	58	解剖部位
+separated	独立症状
+separated	45	54	解剖部位
+
