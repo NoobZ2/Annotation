@@ -3,6 +3,7 @@ from tkinter import *
 import hashlib
 import time
 from tkinter import filedialog
+from tkinter import ttk
 import chardet
 import math
 import tkinter
@@ -41,11 +42,11 @@ class MY_GUI():
         #self.init_window_name["bg"] = "pink"                                    #窗口背景色，其他背景色见：blog.csdn.net/chl0000/article/details/7657887
         #self.init_window_name.attributes("-alpha",0.9)                          #虚化，值越小虚化程度越高
         #标签
-        self.init_data_label = Label(self.init_window_name, text="待处理数据")
+        self.init_data_label = ttk.Label(self.init_window_name, text="待处理数据")
         self.init_data_label.grid(row=0, column=0)
-        self.result_data_label = Label(self.init_window_name, text="输出结果")
+        self.result_data_label = ttk.Label(self.init_window_name, text="输出结果")
         self.result_data_label.grid(row=0, column=12)
-        self.log_label = Label(self.init_window_name, text="日志")
+        self.log_label = ttk.Label(self.init_window_name, text="日志")
         self.log_label.grid(row=12, column=0)
 
         #文本框
@@ -63,37 +64,37 @@ class MY_GUI():
         # self.str_trans_to_md5_button = Button(self.init_window_name, text="字符串转MD5", bg="lightblue", width=10,command=self.str_trans_to_md5)  # 调用内部方法  加()为直接调用
         # self.str_trans_to_md5_button.grid(row=1, column=11)
         #导入文件按钮
-        self.input_button = Button(self.init_window_name,text="导入文件",bg="lightgreen",width=8,command=self.openfile)
+        self.input_button = ttk.Button(self.init_window_name,text="导入文件",width=8,command=self.openfile)
         self.input_button.grid(row=0, column=2)
         # 输入窗口清空按钮
-        self.delet_input_button = Button(self.init_window_name, text="一键清空", bg="red", width=8,command=self.delet_ofInput)
+        self.delet_input_button = ttk.Button(self.init_window_name, text="一键清空",  width=8,command=self.delet_ofInput)
         self.delet_input_button.grid(row=0, column=3)
         #展示窗口清空按钮
-        self.delet_result_button = Button(self.init_window_name, text="一键清空", bg="red", width=8,command=self.delet_ofResult)
+        self.delet_result_button = ttk.Button(self.init_window_name, text="一键清空",  width=8,command=self.delet_ofResult)
         self.delet_result_button.grid(row=0,column=13)
         #导出文件按钮
-        self.output_button = Button(self.init_window_name,text="导出文件",bg="lightgreen",width=8,command=self.outputfile)
+        self.output_button = ttk.Button(self.init_window_name,text="导出文件",width=8,command=self.outputfile)
         self.output_button.grid(row=0,column=14)
         #标记解剖部位按钮
-        self.show_button = Button(self.init_window_name,text="解剖部位",bg="lightblue",width='8',command=self.show_jpbw)
+        self.show_button = ttk.Button(self.init_window_name,text="解剖部位",width='8',command=self.show_jpbw)
         self.show_button.grid(row=2, column=11)
         # 标记症状描述按钮
-        self.show_button = Button(self.init_window_name, text="症状描述",bg="lightyellow", width='8', command=self.show_zzms)
+        self.show_button = ttk.Button(self.init_window_name, text="症状描述", width='8', command=self.show_zzms)
         self.show_button.grid(row=3, column=11)
         # 标记独立症状按钮
-        self.show_button = Button(self.init_window_name, text="独立症状", bg="lightgreen",width='8', command=self.show_dlzz)
+        self.show_button = ttk.Button(self.init_window_name, text="独立症状", width='8', command=self.show_dlzz)
         self.show_button.grid(row=4, column=11)
         # 标记药物按钮
-        self.show_button = Button(self.init_window_name, text="药物",bg="red", width='8', command=self.show_yw)
+        self.show_button =ttk. Button(self.init_window_name, text="药物",width='8', command=self.show_yw)
         self.show_button.grid(row=5, column=11)
         # 标记手术按钮
-        self.show_button = Button(self.init_window_name, text="手术",bg="lightpink", width='8', command=self.show_ss)
+        self.show_button = ttk.Button(self.init_window_name, text="手术", width='8', command=self.show_ss)
         self.show_button.grid(row=6, column=11)
         # 恢复操作按钮
-        self.recover_button = Button(self.init_window_name, text="恢复", width='8', command=self.recover)
+        self.recover_button = ttk.Button(self.init_window_name, text="恢复", width='8', command=self.recover)
         self.recover_button.grid(row=0,column =15)
         # 标注撤销功能ctrl+z实现
-        self.back_button = Button(self.init_window_name, text="撤销", width='8', command=self.backToHistory)
+        self.back_button = ttk.Button(self.init_window_name, text="撤销", width='8', command=self.backToHistory)
         self.back_button.grid(row=0, column=16)
         self.result_data_Text.bind('<Control-Key-z>',self.backToHistory)
 
