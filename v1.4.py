@@ -34,8 +34,6 @@ class MY_GUI():
     def set_init_window(self):
         # 设置输入输出框字体
         ft = tkFont.Font(family='宋体', size=15)
-
-
         self.init_window_name.title("电子病历标注工具_v1.3   ")           #窗口名
         #self.init_window_name.geometry('320x160+10+10')                         #290 160为窗口大小，+10 +10 定义窗口弹出时的默认展示位置
         self.init_window_name.geometry('1500x1000+10+10')
@@ -50,6 +48,7 @@ class MY_GUI():
         self.log_label.grid(row=12, column=0)
         self.cursorIndex = Label(self.init_window_name, text=("row: %s\ncol: %s" % (0, 0)))
         self.cursorIndex.grid(row=10, column=15, pady=4)
+
 
         #文本框
 
@@ -99,10 +98,21 @@ class MY_GUI():
         self.back_button = ttk.Button(self.init_window_name, text="撤销", width='8', command=self.backToHistory)
         self.back_button.grid(row=0, column=16)
         self.result_data_Text.bind('<Control-Key-z>',self.backToHistory)
-
         self.result_data_Text.edit_separator()
 
     #功能函数
+    # 获取鼠标选中文本
+    def button_start(self, event):
+        global s
+        s = self.init_data_Text.index('@%s,%s' % (event.x, event.y))
+
+        print(event.x, event.y)
+
+    def button_end(self, event):
+        global e
+        e = self.init_data_Text.index('@%s,%s' % (event.x, event.y))
+        print(str(e))
+
     def str_trans_to_md5(self):
         src = self.init_data_Text.get(1.0,END).strip().replace("\n","").encode()
         #print("src =",src)
@@ -121,29 +131,19 @@ class MY_GUI():
                 self.result_data_Text.insert(1.0,"字符串转MD5失败")
         else:
             self.write_log_to_Text("ERROR:str_trans_to_md5 failed")
-    #获取鼠标选中文本
-    def button_start(self,event):
-        global s
-        s = self.init_data_Text.index('@%s,%s' % (event.x, event.y))
-
-        print(event.x,event.y)
-
-
-    def button_end(self,event):
-        global e
-        e = self.init_data_Text.index('@%s,%s' % (event.x, event.y))
-        print(str(e))
 
     #标记解剖部位
     def show_jpbw(self):
+
         self.result_data_Text.edit_separator()
         print(self.init_data_Text.selection_get()+"\t"+"解剖部位"+"\n")
-
         start = self.init_data_Text.selection_get()[0]
         end=self.init_data_Text.selection_get()[-1]
         print(start,end)
         start_index=self.init_data_Text.get('1.0',END).index(self.init_data_Text.selection_get()[0])
         end_index=len(self.init_data_Text.selection_get())+start_index-1
+        self.init_data_Text.tag_config('jpbw',background='red')
+        self.init_data_Text.tag_add('jpbw',s,e)
 
 
         self.result_data_Text.insert(END,self.init_data_Text.selection_get()+"\t" + str(start_index) + "\t" + str(end_index) + "\t" +"解剖部位"+"\n")
@@ -161,6 +161,8 @@ class MY_GUI():
         print(start, end)
         start_index = self.init_data_Text.get('1.0', END).index(self.init_data_Text.selection_get()[0])
         end_index = len(self.init_data_Text.selection_get()) + start_index - 1
+        self.init_data_Text.tag_config('zzms', background='yellow')
+        self.init_data_Text.tag_add('zzms', s, e)
 
         print(self.init_data_Text.selection_get() + "\t" + str(start_index) + "\t" + str(end_index) + "症状描述" + "\n")
         self.result_data_Text.insert(END, self.init_data_Text.selection_get() + "\t" + str(start_index) + "\t" + str(end_index)  +"\t" + "症状描述" + "\n")
@@ -174,6 +176,8 @@ class MY_GUI():
         print(start, end)
         start_index = self.init_data_Text.get('1.0', END).index(self.init_data_Text.selection_get()[0])
         end_index = len(self.init_data_Text.selection_get()) + start_index - 1
+        self.init_data_Text.tag_config('dlzz', background='green')
+        self.init_data_Text.tag_add('dlzz', s, e)
 
         print(self.init_data_Text.selection_get() + "\t"+ str(start_index) + "\t" + str(end_index)  + "独立症状" + "\n")
         self.result_data_Text.insert(END, self.init_data_Text.selection_get() + "\t" + str(start_index) + "\t" + str(end_index) + "\t" +"独立症状" + "\n")
@@ -188,6 +192,8 @@ class MY_GUI():
         print(start, end)
         start_index = self.init_data_Text.get('1.0', END).index(self.init_data_Text.selection_get()[0])
         end_index = len(self.init_data_Text.selection_get()) + start_index - 1
+        self.init_data_Text.tag_config('yw', background='blue')
+        self.init_data_Text.tag_add('yw', s, e)
 
         print(self.init_data_Text.selection_get() + "\t" + "药物" + "\n")
         self.result_data_Text.insert(END, self.init_data_Text.selection_get() + "\t" + str(start_index) + "\t" + str(end_index) + "\t" +"药物" + "\n")
@@ -202,6 +208,8 @@ class MY_GUI():
         print(start, end)
         start_index = self.init_data_Text.get('1.0', END).index(self.init_data_Text.selection_get()[0])
         end_index = len(self.init_data_Text.selection_get()) + start_index - 1
+        self.init_data_Text.tag_config('ss', background='orange')
+        self.init_data_Text.tag_add('ss', s, e)
 
         print(self.init_data_Text.selection_get() + "\t" + "手术" + "\n")
         self.result_data_Text.insert(END, self.init_data_Text.selection_get() + "\t"+ str(start_index) + "\t" + str(end_index) + "\t" +"手术" + "\n")
@@ -209,7 +217,7 @@ class MY_GUI():
         self.result_data_Text.edit_separator()
 
     #标注操作撤销功能
-    def callback(self,event):
+    def callback(self):
         # 每当有字符插入的时候，就自动插入一个分割符，主要是防止每次撤销的时候会全部撤销
         self.result_data_Text.edit_separator()
 
@@ -263,16 +271,7 @@ class MY_GUI():
         self.init_data_Text.insert(END, f_contet)
         self.write_log_to_Text()
 
-    def readFile(self,filename):
-        f = open(filename, "r")
-        text = f.read()
-        self.fileName = filename
-        return text
 
-    def setCursorLabel(self, cursor_index):
-        row_column = cursor_index.split('.')
-        cursor_text = ("row: %s\ncol: %s" % (row_column[0], row_column[-1]))
-        self.cursorIndex.config(text=cursor_text)
 
     # 导出文件功能
     def outputfile(self):
